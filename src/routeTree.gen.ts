@@ -10,9 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ArtikelRouteImport } from './routes/artikel'
-import { Route as KatalogRouteImport } from './routes/katalog'
+import { Route as ArtikelIndexRouteImport } from './routes/artikel.index'
 import { Route as ArtikelSlugRouteImport } from './routes/artikel.$slug'
+import { Route as KatalogIndexRouteImport } from './routes/katalog.index'
 import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -20,67 +20,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArtikelRoute = ArtikelRouteImport.update({
-  id: '/artikel',
-  path: '/artikel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KatalogRoute = KatalogRouteImport.update({
-  id: '/katalog',
-  path: '/katalog',
+const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
+  id: '/artikel/',
+  path: '/artikel/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtikelSlugRoute = ArtikelSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ArtikelRoute,
+  id: '/artikel/$slug',
+  path: '/artikel/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogIndexRoute = KatalogIndexRouteImport.update({
+  id: '/katalog/',
+  path: '/katalog/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const KatalogSlugRoute = KatalogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => KatalogRoute,
+  id: '/katalog/$slug',
+  path: '/katalog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/artikel': typeof ArtikelRouteWithChildren
-  '/katalog': typeof KatalogRouteWithChildren
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel/': typeof ArtikelIndexRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/artikel': typeof ArtikelRouteWithChildren
-  '/katalog': typeof KatalogRouteWithChildren
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel': typeof ArtikelIndexRoute
+  '/katalog': typeof KatalogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/artikel': typeof ArtikelRouteWithChildren
-  '/katalog': typeof KatalogRouteWithChildren
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel/': typeof ArtikelIndexRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/artikel' | '/katalog' | '/artikel/$slug' | '/katalog/$slug'
+  fullPaths:
+    '/' | '/artikel/$slug' | '/katalog/$slug' | '/artikel/' | '/katalog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/artikel' | '/katalog' | '/artikel/$slug' | '/katalog/$slug'
+  to: '/' | '/artikel/$slug' | '/katalog/$slug' | '/artikel' | '/katalog'
   id:
     | '__root__'
     | '/'
-    | '/artikel'
-    | '/katalog'
     | '/artikel/$slug'
     | '/katalog/$slug'
+    | '/artikel/'
+    | '/katalog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ArtikelRoute: typeof ArtikelRouteWithChildren
-  KatalogRoute: typeof KatalogRouteWithChildren
+  ArtikelSlugRoute: typeof ArtikelSlugRoute
+  KatalogSlugRoute: typeof KatalogSlugRoute
+  ArtikelIndexRoute: typeof ArtikelIndexRoute
+  KatalogIndexRoute: typeof KatalogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,63 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/artikel': {
-      id: '/artikel'
+    '/artikel/': {
+      id: '/artikel/'
       path: '/artikel'
-      fullPath: '/artikel'
-      preLoaderRoute: typeof ArtikelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/katalog': {
-      id: '/katalog'
-      path: '/katalog'
-      fullPath: '/katalog'
-      preLoaderRoute: typeof KatalogRouteImport
+      fullPath: '/artikel/'
+      preLoaderRoute: typeof ArtikelIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artikel/$slug': {
       id: '/artikel/$slug'
-      path: '/$slug'
+      path: '/artikel/$slug'
       fullPath: '/artikel/$slug'
       preLoaderRoute: typeof ArtikelSlugRouteImport
-      parentRoute: typeof ArtikelRoute
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog/': {
+      id: '/katalog/'
+      path: '/katalog'
+      fullPath: '/katalog/'
+      preLoaderRoute: typeof KatalogIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/katalog/$slug': {
       id: '/katalog/$slug'
-      path: '/$slug'
+      path: '/katalog/$slug'
       fullPath: '/katalog/$slug'
       preLoaderRoute: typeof KatalogSlugRouteImport
-      parentRoute: typeof KatalogRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface ArtikelRouteChildren {
-  ArtikelSlugRoute: typeof ArtikelSlugRoute
-}
-
-const ArtikelRouteChildren: ArtikelRouteChildren = {
-  ArtikelSlugRoute: ArtikelSlugRoute,
-}
-
-const ArtikelRouteWithChildren =
-  ArtikelRoute._addFileChildren(ArtikelRouteChildren)
-
-interface KatalogRouteChildren {
-  KatalogSlugRoute: typeof KatalogSlugRoute
-}
-
-const KatalogRouteChildren: KatalogRouteChildren = {
-  KatalogSlugRoute: KatalogSlugRoute,
-}
-
-const KatalogRouteWithChildren =
-  KatalogRoute._addFileChildren(KatalogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ArtikelRoute: ArtikelRouteWithChildren,
-  KatalogRoute: KatalogRouteWithChildren,
+  ArtikelSlugRoute: ArtikelSlugRoute,
+  KatalogSlugRoute: KatalogSlugRoute,
+  ArtikelIndexRoute: ArtikelIndexRoute,
+  KatalogIndexRoute: KatalogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

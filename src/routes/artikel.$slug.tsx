@@ -64,7 +64,7 @@ function ArticleDetail() {
         </div>
 
         <div className="mt-8 space-y-5 border-t border-border pt-8">
-          {article.paragraphs.map((p, i) => (
+          {article.paragraphs.map((p: string, i: number) => (
             <p key={i} className="text-base leading-8 text-muted-foreground">
               {p}
             </p>
