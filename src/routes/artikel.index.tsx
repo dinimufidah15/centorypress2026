@@ -7,7 +7,7 @@ import { articles } from "@/data/articles";
 import { genres, type Genre } from "@/data/genres";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/artikel")({
+export const Route = createFileRoute("/artikel/")({
   head: () => ({
     meta: [
       { title: "Artikel & Esai — Centory Press" },

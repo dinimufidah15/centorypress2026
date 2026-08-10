@@ -10,33 +10,77 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtikelRouteImport } from './routes/artikel'
+import { Route as KatalogRouteImport } from './routes/katalog'
+import { Route as ArtikelSlugRouteImport } from './routes/artikel.$slug'
+import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtikelRoute = ArtikelRouteImport.update({
+  id: '/artikel',
+  path: '/artikel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogRoute = KatalogRouteImport.update({
+  id: '/katalog',
+  path: '/katalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtikelSlugRoute = ArtikelSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArtikelRoute,
+} as any)
+const KatalogSlugRoute = KatalogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => KatalogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/artikel': typeof ArtikelRouteWithChildren
+  '/katalog': typeof KatalogRouteWithChildren
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/artikel': typeof ArtikelRouteWithChildren
+  '/katalog': typeof KatalogRouteWithChildren
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/artikel': typeof ArtikelRouteWithChildren
+  '/katalog': typeof KatalogRouteWithChildren
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/artikel' | '/katalog' | '/artikel/$slug' | '/katalog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/artikel' | '/katalog' | '/artikel/$slug' | '/katalog/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/artikel'
+    | '/katalog'
+    | '/artikel/$slug'
+    | '/katalog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArtikelRoute: typeof ArtikelRouteWithChildren
+  KatalogRoute: typeof KatalogRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +92,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artikel': {
+      id: '/artikel'
+      path: '/artikel'
+      fullPath: '/artikel'
+      preLoaderRoute: typeof ArtikelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog': {
+      id: '/katalog'
+      path: '/katalog'
+      fullPath: '/katalog'
+      preLoaderRoute: typeof KatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artikel/$slug': {
+      id: '/artikel/$slug'
+      path: '/$slug'
+      fullPath: '/artikel/$slug'
+      preLoaderRoute: typeof ArtikelSlugRouteImport
+      parentRoute: typeof ArtikelRoute
+    }
+    '/katalog/$slug': {
+      id: '/katalog/$slug'
+      path: '/$slug'
+      fullPath: '/katalog/$slug'
+      preLoaderRoute: typeof KatalogSlugRouteImport
+      parentRoute: typeof KatalogRoute
+    }
   }
 }
 
+interface ArtikelRouteChildren {
+  ArtikelSlugRoute: typeof ArtikelSlugRoute
+}
+
+const ArtikelRouteChildren: ArtikelRouteChildren = {
+  ArtikelSlugRoute: ArtikelSlugRoute,
+}
+
+const ArtikelRouteWithChildren =
+  ArtikelRoute._addFileChildren(ArtikelRouteChildren)
+
+interface KatalogRouteChildren {
+  KatalogSlugRoute: typeof KatalogSlugRoute
+}
+
+const KatalogRouteChildren: KatalogRouteChildren = {
+  KatalogSlugRoute: KatalogSlugRoute,
+}
+
+const KatalogRouteWithChildren =
+  KatalogRoute._addFileChildren(KatalogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArtikelRoute: ArtikelRouteWithChildren,
+  KatalogRoute: KatalogRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -7,7 +7,7 @@ import { books } from "@/data/books";
 import { genres, type Genre } from "@/data/genres";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/katalog")({
+export const Route = createFileRoute("/katalog/")({
   head: () => ({
     meta: [
       { title: "Katalog Buku — Centory Press" },
