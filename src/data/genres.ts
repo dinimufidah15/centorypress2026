@@ -20,5 +20,5 @@ export const genres: { value: Genre; label: string; className: string }[] = [
 ];
 
 export function genreMeta(value: Genre) {
-  return genres.find((g) => g.value === value) ?? genres[0];
+  return genres.find((g) => g.value === value) ?? genres[0]!;
 }
