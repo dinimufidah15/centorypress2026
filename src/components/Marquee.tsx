@@ -4,7 +4,7 @@ export function GenreMarquee() {
   const sequence = [...items, ...items, ...items, ...items];
   return (
     <div className="relative overflow-hidden border-y border-border bg-surface py-4">
-      <div className="flex w-max animate-[var(--animate-marquee)] items-center gap-8 pr-8">
+      <div className="flex w-max animate-marquee items-center gap-8 pr-8">
         {[0, 1].map((copy) => (
           <div key={copy} className="flex items-center gap-8" aria-hidden={copy === 1}>
             {sequence.map((item, i) => (

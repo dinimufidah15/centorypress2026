@@ -33,7 +33,7 @@ function TentangPage() {
       <section className="relative overflow-hidden border-b border-border marble">
         <div className="blob -left-24 top-0 h-80 w-80" aria-hidden />
         <div className="relative mx-auto flex max-w-3xl flex-col items-center px-4 py-16 text-center sm:px-6 lg:py-20">
-          <LogoMark className="h-28 w-28 animate-[var(--animate-float)] sm:h-36 sm:w-36" />
+          <LogoMark className="h-28 w-28 animate-float sm:h-36 sm:w-36" />
           <p className="mt-6 font-script text-2xl text-primary">Tentang kami</p>
           <h1 className="mt-1 text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
             Rumah bagi gagasan, bukan sekadar toko buku
