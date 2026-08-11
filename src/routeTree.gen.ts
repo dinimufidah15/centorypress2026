@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KenapaCentoryRouteImport } from './routes/kenapa-centory'
+import { Route as PaketPenerbitanRouteImport } from './routes/paket-penerbitan'
+import { Route as SyaratKetentuanRouteImport } from './routes/syarat-ketentuan'
+import { Route as TentangRouteImport } from './routes/tentang'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as ArtikelIndexRouteImport } from './routes/artikel.index'
+import { Route as ArtikelSlugRouteImport } from './routes/artikel.$slug'
+import { Route as KatalogIndexRouteImport } from './routes/katalog.index'
+import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KenapaCentoryRoute = KenapaCentoryRouteImport.update({
+  id: '/kenapa-centory',
+  path: '/kenapa-centory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaketPenerbitanRoute = PaketPenerbitanRouteImport.update({
+  id: '/paket-penerbitan',
+  path: '/paket-penerbitan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SyaratKetentuanRoute = SyaratKetentuanRouteImport.update({
+  id: '/syarat-ketentuan',
+  path: '/syarat-ketentuan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TentangRoute = TentangRouteImport.update({
+  id: '/tentang',
+  path: '/tentang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtikelIndexRoute = ArtikelIndexRouteImport.update({
+  id: '/artikel/',
+  path: '/artikel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtikelSlugRoute = ArtikelSlugRouteImport.update({
+  id: '/artikel/$slug',
+  path: '/artikel/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogIndexRoute = KatalogIndexRouteImport.update({
+  id: '/katalog/',
+  path: '/katalog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogSlugRoute = KatalogSlugRouteImport.update({
+  id: '/katalog/$slug',
+  path: '/katalog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kenapa-centory': typeof KenapaCentoryRoute
+  '/paket-penerbitan': typeof PaketPenerbitanRoute
+  '/syarat-ketentuan': typeof SyaratKetentuanRoute
+  '/tentang': typeof TentangRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel/': typeof ArtikelIndexRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kenapa-centory': typeof KenapaCentoryRoute
+  '/paket-penerbitan': typeof PaketPenerbitanRoute
+  '/syarat-ketentuan': typeof SyaratKetentuanRoute
+  '/tentang': typeof TentangRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel': typeof ArtikelIndexRoute
+  '/katalog': typeof KatalogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kenapa-centory': typeof KenapaCentoryRoute
+  '/paket-penerbitan': typeof PaketPenerbitanRoute
+  '/syarat-ketentuan': typeof SyaratKetentuanRoute
+  '/tentang': typeof TentangRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/artikel/$slug': typeof ArtikelSlugRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
+  '/artikel/': typeof ArtikelIndexRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/kenapa-centory'
+    | '/paket-penerbitan'
+    | '/syarat-ketentuan'
+    | '/tentang'
+    | '/admin/login'
+    | '/artikel/$slug'
+    | '/katalog/$slug'
+    | '/artikel/'
+    | '/katalog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/kenapa-centory'
+    | '/paket-penerbitan'
+    | '/syarat-ketentuan'
+    | '/tentang'
+    | '/admin/login'
+    | '/artikel/$slug'
+    | '/katalog/$slug'
+    | '/artikel'
+    | '/katalog'
+  id:
+    | '__root__'
+    | '/'
+    | '/kenapa-centory'
+    | '/paket-penerbitan'
+    | '/syarat-ketentuan'
+    | '/tentang'
+    | '/admin/login'
+    | '/artikel/$slug'
+    | '/katalog/$slug'
+    | '/artikel/'
+    | '/katalog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KenapaCentoryRoute: typeof KenapaCentoryRoute
+  PaketPenerbitanRoute: typeof PaketPenerbitanRoute
+  SyaratKetentuanRoute: typeof SyaratKetentuanRoute
+  TentangRoute: typeof TentangRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  ArtikelSlugRoute: typeof ArtikelSlugRoute
+  KatalogSlugRoute: typeof KatalogSlugRoute
+  ArtikelIndexRoute: typeof ArtikelIndexRoute
+  KatalogIndexRoute: typeof KatalogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +169,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kenapa-centory': {
+      id: '/kenapa-centory'
+      path: '/kenapa-centory'
+      fullPath: '/kenapa-centory'
+      preLoaderRoute: typeof KenapaCentoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paket-penerbitan': {
+      id: '/paket-penerbitan'
+      path: '/paket-penerbitan'
+      fullPath: '/paket-penerbitan'
+      preLoaderRoute: typeof PaketPenerbitanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/syarat-ketentuan': {
+      id: '/syarat-ketentuan'
+      path: '/syarat-ketentuan'
+      fullPath: '/syarat-ketentuan'
+      preLoaderRoute: typeof SyaratKetentuanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tentang': {
+      id: '/tentang'
+      path: '/tentang'
+      fullPath: '/tentang'
+      preLoaderRoute: typeof TentangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artikel/': {
+      id: '/artikel/'
+      path: '/artikel'
+      fullPath: '/artikel/'
+      preLoaderRoute: typeof ArtikelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artikel/$slug': {
+      id: '/artikel/$slug'
+      path: '/artikel/$slug'
+      fullPath: '/artikel/$slug'
+      preLoaderRoute: typeof ArtikelSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog/': {
+      id: '/katalog/'
+      path: '/katalog'
+      fullPath: '/katalog/'
+      preLoaderRoute: typeof KatalogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog/$slug': {
+      id: '/katalog/$slug'
+      path: '/katalog/$slug'
+      fullPath: '/katalog/$slug'
+      preLoaderRoute: typeof KatalogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KenapaCentoryRoute: KenapaCentoryRoute,
+  PaketPenerbitanRoute: PaketPenerbitanRoute,
+  SyaratKetentuanRoute: SyaratKetentuanRoute,
+  TentangRoute: TentangRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  ArtikelSlugRoute: ArtikelSlugRoute,
+  KatalogSlugRoute: KatalogSlugRoute,
+  ArtikelIndexRoute: ArtikelIndexRoute,
+  KatalogIndexRoute: KatalogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
