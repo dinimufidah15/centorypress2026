@@ -3,7 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { BookCard } from "@/components/BookCard";
 import { Reveal } from "@/components/Reveal";
-import { books } from "@/data/books";
+import { books as seedBooks, type Book } from "@/data/books";
+import { useAdminList } from "@/lib/adminStore";
 import { genres, type Genre } from "@/data/genres";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +28,8 @@ export const Route = createFileRoute("/katalog/")({
 });
 
 function KatalogPage() {
+  const { items } = useAdminList<Book>("books");
+  const books = items.length ? items : seedBooks;
   const [active, setActive] = useState<Genre | "semua">("semua");
   const [query, setQuery] = useState("");
 
@@ -38,7 +41,7 @@ function KatalogPage() {
         !q || book.title.toLowerCase().includes(q) || book.author.toLowerCase().includes(q);
       return byGenre && byQuery;
     });
-  }, [active, query]);
+  }, [books, active, query]);
 
   return (
     <>

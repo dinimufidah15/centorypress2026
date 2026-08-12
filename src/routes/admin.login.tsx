@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoMark } from "@/components/Logo";
@@ -19,6 +19,7 @@ export const Route = createFileRoute("/admin/login")({
 
 function AdminLogin() {
   const [notice, setNotice] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden marble px-4 py-16">
@@ -43,9 +44,8 @@ function AdminLogin() {
           className="mt-8 space-y-4"
           onSubmit={(e) => {
             e.preventDefault();
-            setNotice(
-              "Autentikasi belum diaktifkan pada versi front end ini. Login akan berfungsi setelah backend dipasang.",
-            );
+            setNotice("Mode demo: autentikasi belum aktif, membuka panel admin…");
+            navigate({ to: "/admin" });
           }}
         >
           <div>
