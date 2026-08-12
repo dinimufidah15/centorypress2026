@@ -14,6 +14,7 @@ import { Route as KenapaCentoryRouteImport } from './routes/kenapa-centory'
 import { Route as PaketPenerbitanRouteImport } from './routes/paket-penerbitan'
 import { Route as SyaratKetentuanRouteImport } from './routes/syarat-ketentuan'
 import { Route as TentangRouteImport } from './routes/tentang'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ArtikelIndexRouteImport } from './routes/artikel.index'
 import { Route as ArtikelSlugRouteImport } from './routes/artikel.$slug'
@@ -43,6 +44,11 @@ const SyaratKetentuanRoute = SyaratKetentuanRouteImport.update({
 const TentangRoute = TentangRouteImport.update({
   id: '/tentang',
   path: '/tentang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/artikel/': typeof ArtikelIndexRoute
   '/katalog/': typeof KatalogIndexRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/artikel': typeof ArtikelIndexRoute
   '/katalog': typeof KatalogIndexRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/artikel/$slug': typeof ArtikelSlugRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/artikel/': typeof ArtikelIndexRoute
   '/katalog/': typeof KatalogIndexRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/artikel/$slug'
     | '/katalog/$slug'
+    | '/admin/'
     | '/artikel/'
     | '/katalog/'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/artikel/$slug'
     | '/katalog/$slug'
+    | '/admin'
     | '/artikel'
     | '/katalog'
   id:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/artikel/$slug'
     | '/katalog/$slug'
+    | '/admin/'
     | '/artikel/'
     | '/katalog/'
   fileRoutesById: FileRoutesById
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   ArtikelSlugRoute: typeof ArtikelSlugRoute
   KatalogSlugRoute: typeof KatalogSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   ArtikelIndexRoute: typeof ArtikelIndexRoute
   KatalogIndexRoute: typeof KatalogIndexRoute
 }
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/tentang'
       fullPath: '/tentang'
       preLoaderRoute: typeof TentangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/login': {
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   ArtikelSlugRoute: ArtikelSlugRoute,
   KatalogSlugRoute: KatalogSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
   ArtikelIndexRoute: ArtikelIndexRoute,
   KatalogIndexRoute: KatalogIndexRoute,
 }

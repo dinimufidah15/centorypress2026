@@ -225,3 +225,16 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Kursor kustom pena kaligrafi */
+html.custom-cursor-on,
+html.custom-cursor-on * {
+  cursor: none !important;
+}
+
+@utility bg-genre-wash {
+  background-image:
+    radial-gradient(at 0% 0%, oklch(0.629 0.111 76 / 0.14) 0px, transparent 55%),
+    radial-gradient(at 100% 0%, oklch(0.487 0.152 358 / 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, oklch(0.505 0.093 150 / 0.14) 0px, transparent 55%);
+}

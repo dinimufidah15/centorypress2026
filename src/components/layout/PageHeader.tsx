@@ -13,7 +13,7 @@ export function PageHeader({
   breadcrumb: { label: string; to?: string }[];
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-border marble">
+    <section className="relative overflow-hidden border-b border-border marble bg-genre-wash">
       <div className="blob -right-24 -top-28 h-72 w-72" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
