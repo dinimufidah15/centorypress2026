@@ -3,17 +3,17 @@ import { ArrowLeft, Check, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GenreBadge } from "@/components/GenreBadge";
 import { BookCard } from "@/components/BookCard";
-import { books, formatPrice } from "@/data/books";
+import { books as seedBooks, formatPrice, type Book } from "@/data/books";
+import { useAdminList } from "@/lib/adminStore";
 import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/katalog/$slug")({
   loader: ({ params }) => {
-    const book = books.find((b) => b.slug === params.slug);
-    if (!book) throw notFound();
-    return { book };
+    const book = seedBooks.find((b) => b.slug === params.slug) ?? null;
+    return { book, slug: params.slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) {
+    if (!loaderData?.book) {
       return { meta: [{ title: "Buku tidak ditemukan — Centory Press" }, { name: "robots", content: "noindex" }] };
     }
     const { book } = loaderData;
@@ -30,8 +30,16 @@ export const Route = createFileRoute("/katalog/$slug")({
 });
 
 function BookDetail() {
-  const { book } = Route.useLoaderData();
-  const related = books.filter((b) => b.genre === book.genre && b.slug !== book.slug).slice(0, 4);
+  const { book: seedBook, slug } = Route.useLoaderData();
+  const { items, ready } = useAdminList<Book>("books");
+  const books = items.length ? items : seedBooks;
+  const book = books.find((b) => b.slug === slug) ?? seedBook;
+  const related = (book ? books : []).filter((b) => b.genre === book?.genre && b.slug !== book.slug).slice(0, 4);
+
+  if (!book) {
+    if (!ready) return null;
+    throw notFound();
+  }
 
   return (
     <>

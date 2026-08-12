@@ -2,16 +2,16 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { GenreBadge } from "@/components/GenreBadge";
 import { ArticleCard } from "@/components/ArticleCard";
-import { articles, formatDate } from "@/data/articles";
+import { articles as seedArticles, formatDate, type Article } from "@/data/articles";
+import { useAdminList } from "@/lib/adminStore";
 
 export const Route = createFileRoute("/artikel/$slug")({
   loader: ({ params }) => {
-    const article = articles.find((a) => a.slug === params.slug);
-    if (!article) throw notFound();
-    return { article };
+    const article = seedArticles.find((a) => a.slug === params.slug) ?? null;
+    return { article, slug: params.slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) {
+    if (!loaderData?.article) {
       return {
         meta: [{ title: "Artikel tidak ditemukan — Centory Press" }, { name: "robots", content: "noindex" }],
       };
@@ -31,8 +31,16 @@ export const Route = createFileRoute("/artikel/$slug")({
 });
 
 function ArticleDetail() {
-  const { article } = Route.useLoaderData();
-  const others = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
+  const { article: seedArticle, slug } = Route.useLoaderData();
+  const { items, ready } = useAdminList<Article>("articles");
+  const articles = items.length ? items : seedArticles;
+  const article = articles.find((a) => a.slug === slug) ?? seedArticle;
+  const others = articles.filter((a) => a.slug !== slug).slice(0, 3);
+
+  if (!article) {
+    if (!ready) return null;
+    throw notFound();
+  }
 
   return (
     <>
