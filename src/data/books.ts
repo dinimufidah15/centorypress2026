@@ -15,6 +15,8 @@ export type Book = {
   status: "available" | "sold_out";
   pages: number;
   year: number;
+  size?: string;
+  isbn?: string;
   featured?: boolean;
 };
 
@@ -38,6 +40,8 @@ export const books: Book[] = [
     status: "available",
     pages: 236,
     year: 2025,
+    size: "14x21 cm",
+    isbn: "978-623-8901-01-4",
     featured: true,
   },
   {
@@ -52,6 +56,8 @@ export const books: Book[] = [
     status: "available",
     pages: 208,
     year: 2025,
+    size: "14x21 cm",
+    isbn: "978-623-8901-02-1",
     featured: true,
   },
   {
@@ -66,6 +72,8 @@ export const books: Book[] = [
     status: "available",
     pages: 312,
     year: 2024,
+    size: "15x23 cm",
+    isbn: "978-623-8901-03-8",
     featured: true,
   },
   {
@@ -80,6 +88,8 @@ export const books: Book[] = [
     status: "available",
     pages: 244,
     year: 2024,
+    size: "14x21 cm",
+    isbn: "978-623-8901-04-5",
     featured: true,
   },
   {
@@ -94,6 +104,8 @@ export const books: Book[] = [
     status: "available",
     pages: 190,
     year: 2024,
+    size: "14x21 cm",
+    isbn: "978-623-8901-05-2",
   },
   {
     slug: "suara-suara-di-dapur",
@@ -107,6 +119,8 @@ export const books: Book[] = [
     status: "sold_out",
     pages: 220,
     year: 2023,
+    size: "14x21 cm",
+    isbn: "978-623-8901-06-9",
   },
   {
     slug: "republik-antrean",
@@ -120,6 +134,8 @@ export const books: Book[] = [
     status: "available",
     pages: 268,
     year: 2023,
+    size: "15x23 cm",
+    isbn: "978-623-8901-07-6",
   },
   {
     slug: "doa-yang-tidak-selesai",
@@ -133,6 +149,8 @@ export const books: Book[] = [
     status: "available",
     pages: 176,
     year: 2023,
+    size: "13x19 cm",
+    isbn: "978-623-8901-08-3",
   },
 ];
 

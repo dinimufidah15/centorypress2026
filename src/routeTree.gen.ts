@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as KenapaCentoryRouteImport } from './routes/kenapa-centory'
 import { Route as PaketPenerbitanRouteImport } from './routes/paket-penerbitan'
 import { Route as SyaratKetentuanRouteImport } from './routes/syarat-ketentuan'
 import { Route as TentangRouteImport } from './routes/tentang'
@@ -24,11 +23,6 @@ import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KenapaCentoryRoute = KenapaCentoryRouteImport.update({
-  id: '/kenapa-centory',
-  path: '/kenapa-centory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaketPenerbitanRoute = PaketPenerbitanRouteImport.update({
@@ -79,7 +73,6 @@ const KatalogSlugRoute = KatalogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/kenapa-centory': typeof KenapaCentoryRoute
   '/paket-penerbitan': typeof PaketPenerbitanRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -92,7 +85,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/kenapa-centory': typeof KenapaCentoryRoute
   '/paket-penerbitan': typeof PaketPenerbitanRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -106,7 +98,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/kenapa-centory': typeof KenapaCentoryRoute
   '/paket-penerbitan': typeof PaketPenerbitanRoute
   '/syarat-ketentuan': typeof SyaratKetentuanRoute
   '/tentang': typeof TentangRoute
@@ -121,7 +112,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/kenapa-centory'
     | '/paket-penerbitan'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -134,7 +124,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/kenapa-centory'
     | '/paket-penerbitan'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -147,7 +136,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/kenapa-centory'
     | '/paket-penerbitan'
     | '/syarat-ketentuan'
     | '/tentang'
@@ -161,7 +149,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  KenapaCentoryRoute: typeof KenapaCentoryRoute
   PaketPenerbitanRoute: typeof PaketPenerbitanRoute
   SyaratKetentuanRoute: typeof SyaratKetentuanRoute
   TentangRoute: typeof TentangRoute
@@ -180,13 +167,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kenapa-centory': {
-      id: '/kenapa-centory'
-      path: '/kenapa-centory'
-      fullPath: '/kenapa-centory'
-      preLoaderRoute: typeof KenapaCentoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/paket-penerbitan': {
@@ -257,7 +237,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  KenapaCentoryRoute: KenapaCentoryRoute,
   PaketPenerbitanRoute: PaketPenerbitanRoute,
   SyaratKetentuanRoute: SyaratKetentuanRoute,
   TentangRoute: TentangRoute,
@@ -271,3 +250,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
