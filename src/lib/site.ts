@@ -1,7 +1,7 @@
 export const site = {
   name: "CV Centory Press",
   shortName: "Centory Press",
-  tagline: "Rumah bagi gagasan yang layak dibukukan",
+  tagline: "Terbitkan karyamu bersama Centory Press",
   description:
     "Penerbit buku dan e-book independen dengan fokus pada ekologi, feminisme, sosial-humaniora, serta teologi & spiritual.",
   address:
@@ -11,8 +11,9 @@ export const site = {
   email: "centorypress@gmail.com",
   instagram: { handle: "@Centory_press", url: "https://www.instagram.com/centory_press" },
   linkedin: { handle: "Centory Press", url: "https://www.linkedin.com/company/centory-press/" },
-  shopee: { handle: "Segera hadir", url: "" },
-  tiktok: { handle: "Segera hadir", url: "" },
+  // Tautan toko Shopee menyusul; biarkan kosong sampai tautan resmi tersedia.
+  shopee: { handle: "Shopee", url: "" },
+  tiktok: { handle: "TikTok", url: "" },
 };
 
 export function waLink(message: string) {
@@ -27,8 +28,11 @@ export const navItems = [
   { to: "/", label: "Beranda" },
   { to: "/katalog", label: "Katalog" },
   { to: "/paket-penerbitan", label: "Paket Penerbitan" },
-  { to: "/kenapa-centory", label: "Kenapa Centory" },
   { to: "/artikel", label: "Artikel & Esai" },
+  { to: "/syarat-ketentuan", label: "Syarat & Ketentuan" },
+] as const;
+
+export const footerLinks = [
+  ...navItems,
   { to: "/tentang", label: "Tentang" },
-  { to: "/syarat-ketentuan", label: "S&K" },
 ] as const;
