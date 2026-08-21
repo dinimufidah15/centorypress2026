@@ -261,12 +261,8 @@ function Hero() {
             height={1600}
             className="aspect-4/5 w-full rounded-[2rem] border border-border object-cover shadow-soft"
           />
-          <div className="absolute -bottom-6 left-4 right-4 rounded-2xl border border-border bg-card/95 p-5 backdrop-blur-sm sm:left-8 sm:right-auto sm:max-w-xs">
-            <p className="font-script text-xl text-primary">Kutipan hari ini</p>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              “Buku bukan produk sekali pakai. Ia arsip cara berpikir sebuah generasi.”
-            </p>
-          </div>
+        </div>
+
         </div>
       </div>
     </section>
