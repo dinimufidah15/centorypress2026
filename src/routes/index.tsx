@@ -62,9 +62,10 @@ function Home() {
           <Reveal>
             <p className="font-script text-2xl text-primary">Kenapa Centory</p>
             <h2 className="mt-1 max-w-2xl text-2xl font-extrabold sm:text-3xl">
-              Enam hal yang membuat penulis memilih kami
+              Mengapa Centory?
             </h2>
           </Reveal>
+
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {advantages.map((item, i) => {
               const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[item.icon];
@@ -166,12 +167,17 @@ function Home() {
         <Reveal className="relative mx-auto max-w-2xl text-center">
           <p className="font-script text-2xl text-primary">Mari mulai</p>
           <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">
-            Punya naskah yang layak dibaca lebih banyak orang?
+            Mari Bawa Gagasanmu Lebih Jauh!
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Ceritakan gagasan Anda kepada tim redaksi {site.shortName}. Konsultasi awal gratis, tanpa
-            komitmen.
+            Punya gagasan yang ingin dibagikan kepada lebih banyak pembaca?
           </p>
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            Ceritakan karyamu kepada tim redaksi {site.shortName}. Kami terbuka untuk membaca dan
+            mendiskusikan naskah dari berbagai perspektif yang sejalan dengan fokus penerbit kami.
+            Konsultasi awal gratis dan tanpa komitmen.
+          </p>
+
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Button asChild variant="brand" size="xl">
               <a href={waDefault} target="_blank" rel="noreferrer">
@@ -220,16 +226,21 @@ function Hero() {
       />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:pb-24 lg:pt-20">
         <div className="space-y-6">
-          <p className="font-script text-3xl text-primary">Rumah bagi gagasan</p>
+          <p className="font-script text-3xl text-primary">Terbitkan karyamu</p>
           <h1 className="text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Naskah Anda pantas menjadi buku yang{" "}
-            <span className="text-brand-gradient">dibaca serius</span>
+            Terbitkan Karyamu Bersama{" "}
+            <span className="text-brand-gradient">Centory Press!</span>
           </h1>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {site.name} adalah penerbit buku dan e-book independen dengan fokus pada ekologi,
-            feminisme, sosial-humaniora, serta teologi &amp; spiritual. Kami mendampingi penulis dari
-            pembacaan pertama sampai buku beredar.
+            Centory Press adalah penerbit independen yang menghadirkan karya-karya reflektif, kritis,
+            dan relevan tentang manusia, masyarakat, iman, gender, dan lingkungan.
           </p>
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Kami membuka ruang bagi penulis, akademisi, peneliti, mahasiswa, dan komunitas untuk
+            membawa gagasannya lebih jauh. Dari tulisan menjadi buku, dari buku menjadi sebuah
+            percakapan.
+          </p>
+
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="brand" size="xl">
               <Link to="/katalog">
@@ -255,14 +266,9 @@ function Hero() {
             height={1600}
             className="aspect-4/5 w-full rounded-[2rem] border border-border object-cover shadow-soft"
           />
-          <div className="absolute -bottom-6 left-4 right-4 rounded-2xl border border-border bg-card/95 p-5 backdrop-blur-sm sm:left-8 sm:right-auto sm:max-w-xs">
-            <p className="font-script text-xl text-primary">Kutipan hari ini</p>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              “Buku bukan produk sekali pakai. Ia arsip cara berpikir sebuah generasi.”
-            </p>
-          </div>
         </div>
       </div>
+
     </section>
   );
 }

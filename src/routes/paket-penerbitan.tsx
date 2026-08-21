@@ -3,29 +3,26 @@ import { Check, MessageCircle } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { packages, processSteps } from "@/data/content";
+import { packages, publishingFlow } from "@/data/content";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/paket-penerbitan")({
   head: () => ({
     meta: [
-      { title: "Paket Penerbitan Buku — Centory Press" },
+      { title: "Pilihan Paket Penerbitan — Centory Press" },
       {
         name: "description",
         content:
-          "Tiga paket penerbitan buku Centory Press: Reguler, Plus, dan Premium — lengkap dengan benefit, syarat, dan estimasi proses.",
+          "Tiga pilihan paket penerbitan Centory Press: Paket Tunas, Paket Tumbuh, dan Paket Rimbun — fleksibel, transparan, dengan pendampingan di setiap tahap.",
       },
-      { property: "og:title", content: "Paket Penerbitan Buku — Centory Press" },
+      {
+        property: "og:title",
+        content: "Pilihan Paket Penerbitan untuk Setiap Gagasan — Centory Press",
+      },
       {
         property: "og:description",
-        content: "Pilih paket penerbitan yang sesuai dengan naskah Anda.",
+        content: "Paket Tunas, Tumbuh, dan Rimbun dengan proses transparan dan pendampingan penuh.",
       },
     ],
   }),
@@ -37,8 +34,8 @@ function PaketPage() {
     <>
       <PageHeader
         eyebrow="Terbitkan Bersama Kami"
-        title="Paket Penerbitan"
-        description="Tiga jalur untuk membawa naskah Anda menjadi buku. Semua paket termasuk pendampingan editorial dan legalitas terbit."
+        title="Pilihan Paket Penerbitan untuk Setiap Gagasan"
+        description="Apa pun tahap dan kebutuhan karyamu, Centory Press menyediakan tiga pilihan penerbitan yang fleksibel dengan proses yang transparan dan pendampingan di setiap tahap."
         breadcrumb={[{ label: "Paket Penerbitan" }]}
       />
 
@@ -57,17 +54,17 @@ function PaketPage() {
                     Paling dipilih
                   </span>
                 )}
-                <h2 className="text-xl font-extrabold">{pkg.name}</h2>
+                <h2 className="text-xl font-extrabold uppercase">{pkg.name}</h2>
                 <p className="mt-2 text-sm text-muted-foreground">{pkg.summary}</p>
-                <p className="mt-5 text-3xl font-extrabold text-brand-gradient">{pkg.priceDisplay}</p>
-                <ul className="mt-6 space-y-3">
+                <p className="mt-5 text-lg font-bold text-brand-gradient">{pkg.priceDisplay}</p>
+                <ol className="mt-6 space-y-3">
                   {pkg.benefits.map((benefit) => (
                     <li key={benefit} className="flex gap-2.5 text-sm text-muted-foreground">
                       <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                      {benefit}
+                      <span>{benefit}</span>
                     </li>
                   ))}
-                </ul>
+                </ol>
                 <Button
                   asChild
                   variant={pkg.featured ? "brand" : "brandOutline"}
@@ -90,37 +87,21 @@ function PaketPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface px-4 py-14 sm:px-6">
-        <div className="mx-auto max-w-4xl">
-          <p className="font-script text-2xl text-primary">Perlu diketahui</p>
-          <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">Syarat &amp; ketentuan per paket</h2>
-          <Accordion type="single" collapsible className="mt-6">
-            {packages.map((pkg) => (
-              <AccordionItem key={pkg.name} value={pkg.name}>
-                <AccordionTrigger className="text-left text-base font-semibold">
-                  {pkg.name}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  {pkg.terms}
-                </AccordionContent>
-              </AccordionItem>
+      <section className="border-t border-border bg-surface px-4 py-14 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <p className="font-script text-2xl text-primary">Tahap demi tahap</p>
+          <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">Alur Kerja Penerbitan</h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {publishingFlow.map((s, i) => (
+              <Reveal key={s.step} delay={i * 80}>
+                <div className="h-full rounded-2xl border border-border bg-background p-6">
+                  <span className="text-sm font-extrabold text-brand-gradient">{s.step}</span>
+                  <h3 className="mt-2 text-base font-bold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                </div>
+              </Reveal>
             ))}
-          </Accordion>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-extrabold sm:text-3xl">Alur kerja penerbitan</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((s, i) => (
-            <Reveal key={s.step} delay={i * 100}>
-              <div className="h-full rounded-2xl border border-border bg-card p-6">
-                <span className="text-sm font-extrabold text-brand-gradient">{s.step}</span>
-                <h3 className="mt-2 text-base font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-              </div>
-            </Reveal>
-          ))}
+          </div>
         </div>
       </section>
     </>
