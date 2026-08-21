@@ -226,16 +226,21 @@ function Hero() {
       />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:pb-24 lg:pt-20">
         <div className="space-y-6">
-          <p className="font-script text-3xl text-primary">Rumah bagi gagasan</p>
+          <p className="font-script text-3xl text-primary">Terbitkan karyamu</p>
           <h1 className="text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Naskah Anda pantas menjadi buku yang{" "}
-            <span className="text-brand-gradient">dibaca serius</span>
+            Terbitkan Karyamu Bersama{" "}
+            <span className="text-brand-gradient">Centory Press!</span>
           </h1>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {site.name} adalah penerbit buku dan e-book independen dengan fokus pada ekologi,
-            feminisme, sosial-humaniora, serta teologi &amp; spiritual. Kami mendampingi penulis dari
-            pembacaan pertama sampai buku beredar.
+            Centory Press adalah penerbit independen yang menghadirkan karya-karya reflektif, kritis,
+            dan relevan tentang manusia, masyarakat, iman, gender, dan lingkungan.
           </p>
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Kami membuka ruang bagi penulis, akademisi, peneliti, mahasiswa, dan komunitas untuk
+            membawa gagasannya lebih jauh. Dari tulisan menjadi buku, dari buku menjadi sebuah
+            percakapan.
+          </p>
+
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="brand" size="xl">
               <Link to="/katalog">
