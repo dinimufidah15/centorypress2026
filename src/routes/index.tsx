@@ -62,9 +62,10 @@ function Home() {
           <Reveal>
             <p className="font-script text-2xl text-primary">Kenapa Centory</p>
             <h2 className="mt-1 max-w-2xl text-2xl font-extrabold sm:text-3xl">
-              Enam hal yang membuat penulis memilih kami
+              Mengapa Centory?
             </h2>
           </Reveal>
+
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {advantages.map((item, i) => {
               const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[item.icon];
