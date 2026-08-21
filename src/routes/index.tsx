@@ -167,12 +167,17 @@ function Home() {
         <Reveal className="relative mx-auto max-w-2xl text-center">
           <p className="font-script text-2xl text-primary">Mari mulai</p>
           <h2 className="mt-1 text-2xl font-extrabold sm:text-3xl">
-            Punya naskah yang layak dibaca lebih banyak orang?
+            Mari Bawa Gagasanmu Lebih Jauh!
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Ceritakan gagasan Anda kepada tim redaksi {site.shortName}. Konsultasi awal gratis, tanpa
-            komitmen.
+            Punya gagasan yang ingin dibagikan kepada lebih banyak pembaca?
           </p>
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            Ceritakan karyamu kepada tim redaksi {site.shortName}. Kami terbuka untuk membaca dan
+            mendiskusikan naskah dari berbagai perspektif yang sejalan dengan fokus penerbit kami.
+            Konsultasi awal gratis dan tanpa komitmen.
+          </p>
+
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Button asChild variant="brand" size="xl">
               <a href={waDefault} target="_blank" rel="noreferrer">
